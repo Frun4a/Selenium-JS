@@ -6,27 +6,32 @@ var chrome = require('selenium-webdriver/chrome');
 var path = require('chromedriver').path;
 var service = new chrome.ServiceBuilder(path).build();
 chrome.setDefaultService(service);
-var driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
 
-driver.get('https://library-app.firebaseapp.com/');
 
-driver.findElement(By.css('input'))
-  .sendKeys('user@email.com');
- // .then(el => console.log('Success, input found ' + el));
+async function main() {
 
-driver.findElement(By.css('.btn-lg'))
-  .click();
-  // .getText()
-  // .then(text => console.log(`The text of the button: ${text}`));
+  const driver = await new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
 
-driver.findElement(By.css('.alert-success'))
-  .getText()
-  .then(text => console.log(`Success message appeared: ${text}`));
+  await driver.get('https://library-app.firebaseapp.com/');
+  await driver.manage().setTimeouts( {implicit: 5000} );
 
-driver.findElements(By.css('nav li'))
-  .then(array => array.map(el => el.getText().then(text => text !='' ? console.log(`Text of the nav element is: ${text}`) : null)));
+  await driver.findElement(By.css('input')).sendKeys('user@email.com');
 
-setTimeout(() => driver.quit(), 5000);
+  await driver.findElement(By.css('.btn-lg')).click();
+  await driver.sleep(1000);
+
+  await driver.findElement(By.css('.alert-success'))
+    .getText()
+    .then(text => console.log(`Success message appeared: ${text}`));
+
+  await driver.findElements(By.css('nav li'))
+    .then(array => array.map(el => el.getText().then(text => text !='' ? console.log(`Text of the nav element is: ${text}`) : null)));
+
+  await setTimeout(() => driver.quit(), 100);
+}
+
+main();
+
 
 
 
