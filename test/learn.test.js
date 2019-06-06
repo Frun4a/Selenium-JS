@@ -45,36 +45,3 @@ describe('Library App scenarious', async function() {
     await driver.getTitle().then(title => title === 'LibraryApp - Ember 3.0 Tutorial!!!' ? console.log('True') : console.log('False'));
   });
 });
-
-
-
-
-// async function main() {
-
-//   const driver = await new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
-
-//   await driver.get('https://library-app.firebaseapp.com/');
-//   //await driver.manage().setTimeouts( {implicit: 5000} );
-
-  
-//   await submitBtn.click();
-
-//   //await driver.findElement(By.css('.btn-lg')).click();
-
-//   await driver.wait(until.elementLocated(By.css('.alert-success')), 5000)
-//     .getText()
-//     .then(text => console.log(`Success message appeared: ${text}`));
-
-//   await driver.findElements(By.css('nav li'))
-//    .then(array => array.map(el => el.getText().then(text => text !='' ? console.log(`Text of the nav element is: ${text}`) : null)));
-
-
-
-//   await setTimeout(() => driver.quit(), 100);
-// }
-
-// main();
-
-
-
-
